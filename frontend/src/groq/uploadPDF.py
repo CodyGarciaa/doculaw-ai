@@ -7,7 +7,6 @@ from pinecone import Pinecone, ServerlessSpec
 # 🔐 Load API Keys & Config
 # --------------------------
 load_dotenv()
-
 OPENAI_API_KEY   = os.getenv("OPENAI_API_KEY")
 GROQ_API_KEY     = os.getenv("GROQ_API_KEY")
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")    # defined in .env file
@@ -16,6 +15,9 @@ PINECONE_CLOUD  = 'aws'
 PINECONE_REGION = 'us-east-1'       # free Pinecone tiers
 INDEX_NAME      = "legal-search"
 DIMENSION       = 1536  # must match embedding size
+
+new_pdf = "src/groq/test.pdf"
+base_name = os.path.splitext(new_pdf)[0]
 
 # --------------------------
 # 🔌 OpenAI / Groq Clients

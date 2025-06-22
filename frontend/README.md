@@ -454,3 +454,4 @@ Installs:
 - pip install openai 
 - pip install pinecone-client
 - pip install python-dotenv
+- pip install PyMuPDF
