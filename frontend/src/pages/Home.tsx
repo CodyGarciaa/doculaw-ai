@@ -5,159 +5,243 @@ import {
   ChatBubbleBottomCenterTextIcon,
   MagnifyingGlassIcon,
   CloudArrowUpIcon,
+  ChartBarIcon,
+  ClockIcon,
+  StarIcon,
+  ArrowRightIcon,
 } from '@heroicons/react/24/outline';
 
-const features = [
+const quickActions = [
   {
-    name: 'Document Translation',
-    description: 'Upload complex legal documents and get easy-to-understand translations instantly.',
-    icon: DocumentTextIcon,
+    name: 'Upload New Document',
+    description: 'Get your legal document translated instantly',
+    icon: CloudArrowUpIcon,
     href: '/upload',
+    color: 'from-blue-500 to-blue-600',
+    bgColor: 'bg-blue-50',
   },
   {
-    name: 'AI Legal Assistant',
-    description: 'Ask questions about legal concepts and get clear, helpful explanations.',
+    name: 'Start New Chat',
+    description: 'Ask legal questions and get instant help',
     icon: ChatBubbleBottomCenterTextIcon,
     href: '/chat',
+    color: 'from-green-500 to-green-600',
+    bgColor: 'bg-green-50',
   },
   {
-    name: 'Smart Search',
-    description: 'Find relevant legal documents and precedents with intelligent search.',
+    name: 'Search Documents',
+    description: 'Find specific legal information quickly',
     icon: MagnifyingGlassIcon,
     href: '/search',
+    color: 'from-purple-500 to-purple-600',
+    bgColor: 'bg-purple-50',
+  },
+  {
+    name: 'View Analytics',
+    description: 'Track your legal document progress',
+    icon: ChartBarIcon,
+    href: '/dashboard',
+    color: 'from-orange-500 to-orange-600',
+    bgColor: 'bg-orange-50',
+  },
+];
+
+const recentActivity = [
+  {
+    type: 'document',
+    title: 'Rental Agreement Simplified',
+    time: '2 hours ago',
+    status: 'completed',
+    complexity: 'reduced by 75%',
+  },
+  {
+    type: 'chat',
+    title: 'Employment Contract Questions',
+    time: '1 day ago',
+    status: 'active',
+    messages: '12 messages',
+  },
+  {
+    type: 'search',
+    title: 'Insurance Policy Terms',
+    time: '2 days ago',
+    status: 'completed',
+    results: '8 relevant results',
+  },
+];
+
+const tips = [
+  {
+    title: 'Upload Multiple Formats',
+    description: 'We support PDF, DOC, DOCX, and TXT files up to 10MB',
+    icon: '📄',
+  },
+  {
+    title: 'Ask Follow-up Questions',
+    description: 'Our AI remembers context from your documents for better answers',
+    icon: '💡',
+  },
+  {
+    title: 'Save Important Sections',
+    description: 'Bookmark key parts of simplified documents for quick reference',
+    icon: '🔖',
   },
 ];
 
 const Home: React.FC = () => {
+  // Get user profile from localStorage (from onboarding)
+  const userProfile = JSON.parse(localStorage.getItem('doculaw_user_profile') || '{}');
+  const userName = userProfile.name || 'there';
+  const englishLevel = userProfile.englishProficiency || 'intermediate';
+
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
-      {/* Hero Section */}
-      <div className="text-center py-12">
-        <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-          Make Legal Documents
-          <span className="text-legal-600"> Accessible</span>
-        </h1>
-        <p className="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
-          DocuLaw AI helps translate complex legal language into plain English, making legal 
-          information accessible to everyone, especially underserved communities.
-        </p>
-        <div className="mt-10 flex items-center justify-center gap-x-6">
+    <div className="px-4 sm:px-6 lg:px-8 space-y-8">
+      {/* Welcome Section */}
+      <div className="card-elevated p-8 bg-gradient-to-r from-legal-700 to-purple-700 text-white relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-0 left-0 w-24 h-24 bg-white/5 rounded-full blur-xl"></div>
+        <div className="relative z-10">
+          <h1 className="text-3xl font-bold mb-4">
+            Welcome back, {userName}! 👋
+          </h1>
+          <p className="text-xl text-white/90 mb-6">
+            Ready to simplify more legal documents? Your English level is set to{' '}
+            <span className="font-semibold capitalize">{englishLevel}</span> - 
+            we'll adjust our explanations accordingly.
+          </p>
           <Link
             to="/upload"
-            className="btn-primary"
+            className="inline-flex items-center bg-white text-legal-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
           >
-            Upload Document
+            <CloudArrowUpIcon className="h-5 w-5 mr-2" />
+            Upload Your Next Document
           </Link>
+        </div>
+      </div>
+
+      {/* Quick Actions */}
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {quickActions.map((action) => (
+            <Link
+              key={action.name}
+              to={action.href}
+              className="perspective-card group"
+            >
+              <div className={`card-3d p-6 h-full ${action.bgColor} hover:scale-105 transition-all duration-300`}>
+                <div className={`inline-flex p-3 rounded-xl bg-gradient-to-r ${action.color} mb-4`}>
+                  <action.icon className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-legal-600 transition-colors">
+                  {action.name}
+                </h3>
+                <p className="text-sm text-gray-600 mb-4">{action.description}</p>
+                <div className="flex items-center text-legal-600 font-medium text-sm">
+                  Get Started
+                  <ArrowRightIcon className="h-4 w-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      {/* Recent Activity */}
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-gray-900">Recent Activity</h2>
           <Link
-            to="/chat"
-            className="btn-secondary"
+            to="/dashboard"
+            className="text-legal-600 hover:text-legal-700 font-medium transition-colors flex items-center"
           >
-            Start Chat <span aria-hidden="true">→</span>
+            View All
+            <ArrowRightIcon className="h-4 w-4 ml-1" />
           </Link>
         </div>
-      </div>
-
-      {/* Problem Statement */}
-      <div className="py-16 bg-white rounded-lg shadow-sm mb-16">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-              Bridging the Legal Literacy Gap
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Most people have limited understanding of legal documents and public policy, 
-              disproportionately affecting low-income and minority communities who cannot 
-              afford expensive legal consultation.
-            </p>
-          </div>
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="text-3xl font-bold text-legal-600">67%</div>
-              <div className="mt-2 text-sm text-gray-600">
-                of Americans struggle with legal document comprehension
+        <div className="space-y-4">
+          {recentActivity.map((activity, index) => (
+            <div key={index} className="floating-card p-6">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                    activity.type === 'document' ? 'bg-blue-100 text-blue-600' :
+                    activity.type === 'chat' ? 'bg-green-100 text-green-600' :
+                    'bg-purple-100 text-purple-600'
+                  }`}>
+                    {activity.type === 'document' ? <DocumentTextIcon className="h-6 w-6" /> :
+                     activity.type === 'chat' ? <ChatBubbleBottomCenterTextIcon className="h-6 w-6" /> :
+                     <MagnifyingGlassIcon className="h-6 w-6" />}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">{activity.title}</h3>
+                    <div className="flex items-center text-sm text-gray-600 space-x-4">
+                      <span className="flex items-center">
+                        <ClockIcon className="h-4 w-4 mr-1" />
+                        {activity.time}
+                      </span>
+                      <span className="text-gray-400">•</span>
+                      <span>{
+                        activity.complexity || activity.messages || activity.results
+                      }</span>
+                    </div>
+                  </div>
+                </div>
+                <div className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  activity.status === 'completed' ? 'bg-green-100 text-green-800' :
+                  activity.status === 'active' ? 'bg-blue-100 text-blue-800' :
+                  'bg-gray-100 text-gray-800'
+                }`}>
+                  {activity.status}
+                </div>
               </div>
             </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-legal-600">$300+</div>
-              <div className="mt-2 text-sm text-gray-600">
-                Average hourly rate for legal consultation
-              </div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold text-legal-600">45M</div>
-              <div className="mt-2 text-sm text-gray-600">
-                Americans who need but cannot afford legal help
-              </div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {/* Features */}
-      <div className="py-16">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">
-              Powerful Features for Legal Understanding
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Our AI-powered platform makes legal information accessible through multiple tools
-            </p>
-          </div>
-          <div className="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-              <Link
-                key={feature.name}
-                to={feature.href}
-                className="group relative overflow-hidden rounded-lg bg-white p-6 shadow-sm border border-gray-200 hover:shadow-md transition-all duration-200"
-              >
-                <div>
-                  <span className="inline-flex rounded-lg bg-legal-50 p-3 ring-4 ring-white">
-                    <feature.icon className="h-6 w-6 text-legal-600" aria-hidden="true" />
-                  </span>
-                </div>
-                <div className="mt-8">
-                  <h3 className="text-lg font-medium text-gray-900 group-hover:text-legal-600">
-                    {feature.name}
-                  </h3>
-                  <p className="mt-2 text-sm text-gray-500">
-                    {feature.description}
-                  </p>
-                </div>
-                <span
-                  className="pointer-events-none absolute top-6 right-6 text-gray-300 group-hover:text-legal-300"
-                  aria-hidden="true"
-                >
-                  <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M20 4h1a1 1 0 00-1-1v1zm-1 12a1 1 0 102 0h-2zM8 3a1 1 0 000 2V3zM3.293 19.293a1 1 0 101.414 1.414l-1.414-1.414zM19 4v12h2V4h-2zm1-1H8v2h12V3zm-.707.293l-16 16 1.414 1.414 16-16-1.414-1.414z" />
-                  </svg>
-                </span>
-              </Link>
-            ))}
-          </div>
+      {/* Tips & Tricks */}
+      <div>
+        <h2 className="text-2xl font-bold text-gray-900 mb-6">Tips & Tricks</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {tips.map((tip, index) => (
+            <div key={index} className="card-elevated p-6 group hover:scale-105 transition-all duration-300">
+              <div className="text-3xl mb-4">{tip.icon}</div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-legal-600 transition-colors">
+                {tip.title}
+              </h3>
+              <p className="text-gray-600">{tip.description}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* CTA Section */}
-      <div className="py-16">
-        <div className="bg-legal-700 rounded-lg shadow-xl">
-          <div className="px-6 py-16 sm:px-12 sm:py-20 lg:px-16">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-white">
-                Get Started Today
-              </h2>
-              <p className="mt-4 text-lg text-legal-200">
-                Upload your first legal document and see the difference AI-powered translation can make.
-              </p>
-              <div className="mt-8 flex justify-center">
-                <Link
-                  to="/upload"
-                  className="inline-flex items-center rounded-md bg-white px-4 py-2 text-sm font-medium text-legal-700 shadow-sm hover:bg-legal-50 transition-colors"
-                >
-                  <CloudArrowUpIcon className="h-5 w-5 mr-2" />
-                  Upload Your First Document
-                </Link>
-              </div>
+      {/* Community Impact */}
+      <div className="card-elevated p-8 bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
+            <StarIcon className="h-8 w-8 text-white" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-4">
+            You're Making a Difference!
+          </h2>
+          <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
+            By using DocuLaw AI, you're part of a movement to make legal information 
+            accessible to everyone. Every document you simplify helps build a better 
+            understanding of legal rights in underserved communities.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <div className="text-3xl font-bold gradient-text">98%</div>
+              <div className="text-sm text-gray-600">Complexity Reduction</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold gradient-text">2.5 hrs</div>
+              <div className="text-sm text-gray-600">Average Time Saved</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold gradient-text">$280</div>
+              <div className="text-sm text-gray-600">Legal Costs Avoided</div>
             </div>
           </div>
         </div>

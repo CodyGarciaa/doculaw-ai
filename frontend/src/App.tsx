@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
+import Landing from './pages/Landing';
+import Onboarding from './pages/Onboarding';
 import Home from './pages/Home';
 import Upload from './pages/Upload';
 import Documents from './pages/Documents';
@@ -13,18 +15,21 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/upload" element={<Upload />} />
-            <Route path="/documents" element={<Documents />} />
-            <Route path="/documents/:id" element={<DocumentViewer />} />
-            <Route path="/chat" element={<Chat />} />
-            <Route path="/chat/:sessionId" element={<Chat />} />
-            <Route path="/search" element={<Search />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-          </Routes>
-        </Layout>
+        <Routes>
+          {/* Public routes without layout */}
+          <Route path="/" element={<Landing />} />
+          <Route path="/onboarding" element={<Onboarding />} />
+          
+          {/* Protected routes with layout */}
+          <Route path="/home" element={<Layout><Home /></Layout>} />
+          <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+          <Route path="/upload" element={<Layout><Upload /></Layout>} />
+          <Route path="/documents" element={<Layout><Documents /></Layout>} />
+          <Route path="/documents/:id" element={<Layout><DocumentViewer /></Layout>} />
+          <Route path="/chat" element={<Layout><Chat /></Layout>} />
+          <Route path="/chat/:sessionId" element={<Layout><Chat /></Layout>} />
+          <Route path="/search" element={<Layout><Search /></Layout>} />
+        </Routes>
       </div>
     </Router>
   );
