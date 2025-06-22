@@ -10,13 +10,12 @@ load_dotenv()
 
 OPENAI_API_KEY   = os.getenv("OPENAI_API_KEY")
 GROQ_API_KEY     = os.getenv("GROQ_API_KEY")
-PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
+PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")    # defined in .env file
 
-# (Optional) override these via .env:
-PINECONE_CLOUD  = os.getenv("PINECONE_CLOUD", "aws")
-PINECONE_REGION = os.getenv("PINECONE_REGION", "us-east-1")
+PINECONE_CLOUD  = 'aws'
+PINECONE_REGION = 'us-east-1'       # free Pinecone tiers
 INDEX_NAME      = "legal-search"
-DIMENSION       = 1536  # must match your embedding size
+DIMENSION       = 1536  # must match embedding size
 
 # --------------------------
 # 🔌 OpenAI / Groq Clients
