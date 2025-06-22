@@ -95,14 +95,14 @@ const Upload: React.FC = () => {
   return (
     <div className="px-4 sm:px-6 lg:px-8 space-y-8">
       {/* Header */}
-      <div className="text-center">
-        <div className="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
-          <CloudArrowUpIcon className="h-8 w-8 text-white" />
+      <div className="text-center py-12">
+        <div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-8">
+          <CloudArrowUpIcon className="h-10 w-10 text-white" />
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        <h1 className="heading-1 gradient-text mb-8">
           Upload Your Legal Document
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="subheading text-gray-600 max-w-3xl mx-auto">
           Upload any legal document and get an instant, easy-to-understand translation 
           tailored to your English proficiency level.
         </p>

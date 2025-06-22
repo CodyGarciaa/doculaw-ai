@@ -64,7 +64,7 @@ const Landing: React.FC = () => {
   return (
     <div className="min-h-screen">
       {/* Navigation */}
-      <nav className="relative z-10 bg-white/80 backdrop-blur-md border-b border-gray-200/50">
+      <nav className="relative z-10 bg-white/90 backdrop-blur-sm border-b border-gray-200/30">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
@@ -83,46 +83,53 @@ const Landing: React.FC = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 hero-gradient"></div>
-        <div className="absolute inset-0 bg-black/20"></div>
+      {/* Hero Section - Minimalist */}
+      <section className="relative min-h-screen flex items-center justify-center">
+        <div className="absolute inset-0 bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-800"></div>
         
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl animate-pulse"></div>
-        <div className="absolute bottom-32 right-20 w-32 h-32 bg-white/5 rounded-full blur-2xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white/5 rounded-full blur-xl animate-pulse delay-500"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-8 leading-tight">
-              Legal Help That
-              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-orange-300">
-                Everyone Deserves
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white/90 mb-12 leading-relaxed">
-              Transform complex legal documents into plain English. Get AI-powered legal assistance 
-              designed for underserved communities who can't afford expensive lawyers.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-16">
-              <Link to="/onboarding" className="btn-primary text-lg px-8 py-4 shadow-2xl">
-                Start Your Journey
-              </Link>
-              <button className="btn-ghost text-lg px-8 py-4 flex items-center">
-                <PlayIcon className="h-5 w-5 mr-2" />
-                Watch Demo
-              </button>
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center min-h-[70vh]">
+            {/* Left Side - Text */}
+            <div className="lg:col-span-3 text-center lg:text-left">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-6 leading-tight tracking-tight">
+                Legal Help That{' '}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-orange-200">
+                  Everyone Deserves
+                </span>
+              </h1>
+              <p className="text-lg md:text-xl lg:text-2xl text-white/85 leading-relaxed font-light mb-8 max-w-2xl lg:max-w-none">
+                Transform complex legal documents into plain English. Get AI-powered legal assistance 
+                designed for underserved communities who can't afford expensive lawyers.
+              </p>
             </div>
 
-            {/* Quick Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {/* Right Side - Buttons */}
+            <div className="lg:col-span-2 flex flex-col justify-center space-y-8">
+              <div className="space-y-4">
+                <Link to="/onboarding" className="block w-full max-w-sm btn-primary text-lg px-8 py-4 bg-white text-indigo-700 hover:bg-gray-50 text-center font-semibold shadow-xl">
+                  Start Your Journey →
+                </Link>
+                <button className="w-full max-w-sm btn-ghost text-lg px-6 py-3 flex items-center justify-center border-white/40 hover:bg-white/10 hover:border-white/60 transition-all">
+                  <PlayIcon className="h-5 w-5 mr-2" />
+                  Watch Demo
+                </button>
+              </div>
+              
+              <div className="text-white/90 text-sm space-y-1 max-w-sm">
+                <p>✓ No credit card required</p>
+                <p>✓ Free for basic use</p>
+                <p>✓ 2-minute setup</p>
+              </div>
+            </div>
+          </div>
+          
+          {/* Stats Row - Bottom */}
+          <div className="absolute bottom-16 left-4 right-4 sm:left-6 sm:right-6 lg:left-8 lg:right-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {stats.map((stat, index) => (
-                <div key={stat.label} className="glass-card p-6 transform hover:scale-105 transition-all duration-300">
-                  <stat.icon className="h-8 w-8 text-white/80 mx-auto mb-2" />
-                  <div className="text-2xl md:text-3xl font-bold text-white">{stat.value}</div>
-                  <div className="text-sm text-white/70">{stat.label}</div>
+                <div key={stat.label} className="text-white">
+                  <div className="text-2xl md:text-3xl font-bold mb-1">{stat.value}</div>
+                  <div className="text-sm text-white/70 font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>
