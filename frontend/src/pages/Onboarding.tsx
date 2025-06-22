@@ -11,6 +11,8 @@ import {
   GlobeAltIcon,
   UserIcon,
 } from '@heroicons/react/24/outline';
+import { saveUserProfile } from '../utils/helpers';
+import { GlassButton } from '../components/ui';
 
 interface OnboardingData {
   name: string;
@@ -112,15 +114,38 @@ const Onboarding: React.FC = () => {
     }
   };
 
-  const handleComplete = () => {
-    // Store onboarding data in localStorage for now
-    localStorage.setItem('doculaw_onboarding', JSON.stringify(data));
-    localStorage.setItem('doculaw_user_profile', JSON.stringify({
-      ...data,
-      onboardingCompleted: true,
-      dateCompleted: new Date().toISOString(),
-    }));
-    navigate('/dashboard');
+  const handleComplete = async () => {
+    try {
+      // Validate and prepare data for saving
+      const profileData = {
+        name: data.name,
+        primaryLanguage: data.primaryLanguage,
+        englishProficiency: data.englishProficiency as 'beginner' | 'intermediate' | 'advanced',
+        legalExperience: data.legalExperience as 'none' | 'some' | 'experienced',
+        primaryNeeds: data.primaryNeeds,
+        readingPreference: data.readingPreference as 'simple' | 'standard' | 'detailed',
+        communicationStyle: data.communicationStyle as 'visual' | 'text' | 'audio',
+        onboardingCompleted: true,
+      };
+      
+      // Save user profile using our utility function
+      const profile = await saveUserProfile(profileData);
+      
+      console.log('User onboarding completed successfully:', profile);
+      
+      // Navigate to dashboard
+      navigate('/dashboard');
+    } catch (error) {
+      console.error('Error completing onboarding:', error);
+      // Fallback to original localStorage approach
+      localStorage.setItem('doculaw_onboarding', JSON.stringify(data));
+      localStorage.setItem('doculaw_user_profile', JSON.stringify({
+        ...data,
+        onboardingCompleted: true,
+        dateCompleted: new Date().toISOString(),
+      }));
+      navigate('/dashboard');
+    }
   };
 
   const updateData = (updates: Partial<OnboardingData>) => {

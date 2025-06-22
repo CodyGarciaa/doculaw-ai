@@ -2,14 +2,20 @@
 export interface Document {
   id: string;
   title: string;
+  originalTitle?: string;
   originalContent: string;
   simplifiedContent?: string;
   uploadDate: Date;
+  processedDate?: Date;
   status: 'processing' | 'completed' | 'error';
+  type?: string;
   fileType: string;
   fileSize: number;
+  pageCount?: number;
   summary?: string;
   complexity?: 'low' | 'medium' | 'high';
+  simplificationLevel?: number;
+  tags?: string[];
 }
 
 // Chat types

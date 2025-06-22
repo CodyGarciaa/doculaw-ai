@@ -9,6 +9,7 @@ import {
   SearchQuery,
   SearchResult,
 } from '../types';
+import { UserProfile } from '../utils/helpers';
 
 class ApiService {
   private api: AxiosInstance;
@@ -164,4 +165,82 @@ class ApiService {
 }
 
 export const apiService = new ApiService();
-export default apiService; 
+export default apiService;
+
+// User data service functions
+export const userService = {
+  // Save user profile (will integrate with backend later)
+  async saveProfile(profile: UserProfile): Promise<UserProfile> {
+    try {
+      // TODO: Replace with actual API call when backend is ready
+      // For now, simulate API behavior
+      console.log('Saving user profile to user.json:', profile);
+      
+      // In production, this would be:
+      // const response = await fetch('/api/users/profile', {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(profile)
+      // });
+      // return response.json();
+      
+      return Promise.resolve(profile);
+    } catch (error) {
+      console.error('Error saving user profile:', error);
+      throw error;
+    }
+  },
+
+  // Get user profile (will integrate with backend later)
+  async getProfile(userId?: string): Promise<UserProfile | null> {
+    try {
+      // TODO: Replace with actual API call when backend is ready
+      console.log('Fetching user profile from user.json');
+      
+      // In production, this would be:
+      // const response = await fetch(`/api/users/profile/${userId || 'current'}`);
+      // return response.json();
+      
+      return Promise.resolve(null);
+    } catch (error) {
+      console.error('Error fetching user profile:', error);
+      return null;
+    }
+  },
+
+  // Update user profile (will integrate with backend later)
+  async updateProfile(updates: Partial<UserProfile>): Promise<UserProfile> {
+    try {
+      console.log('Updating user profile in user.json:', updates);
+      
+      // TODO: Replace with actual API call when backend is ready
+      // const response = await fetch('/api/users/profile', {
+      //   method: 'PATCH',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify(updates)
+      // });
+      // return response.json();
+      
+      return Promise.resolve(updates as UserProfile);
+    } catch (error) {
+      console.error('Error updating user profile:', error);
+      throw error;
+    }
+  },
+
+  // Get all profiles (for admin/analytics - will integrate with backend later)
+  async getAllProfiles(): Promise<UserProfile[]> {
+    try {
+      console.log('Fetching all user profiles from user.json');
+      
+      // TODO: Replace with actual API call when backend is ready
+      // const response = await fetch('/api/users/profiles');
+      // return response.json();
+      
+      return Promise.resolve([]);
+    } catch (error) {
+      console.error('Error fetching user profiles:', error);
+      return [];
+    }
+  }
+}; 

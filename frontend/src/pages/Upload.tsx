@@ -93,26 +93,26 @@ const Upload: React.FC = () => {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="space-y-6 sm:space-y-8 overflow-x-hidden">
       {/* Header */}
-      <div className="text-center py-12">
-        <div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-8">
-          <CloudArrowUpIcon className="h-10 w-10 text-white" />
+      <div className="text-center py-6 sm:py-8 md:py-12 mx-4 sm:mx-6 lg:mx-8">
+        <div className="w-16 h-16 sm:w-20 sm:h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 md:mb-8">
+          <CloudArrowUpIcon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
         </div>
-        <h1 className="heading-1 gradient-text mb-8">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold gradient-text mb-4 sm:mb-6 md:mb-8">
           Upload Your Legal Document
         </h1>
-        <p className="subheading text-gray-600 max-w-3xl mx-auto">
+        <p className="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
           Upload any legal document and get an instant, easy-to-understand translation 
           tailored to your English proficiency level.
         </p>
       </div>
 
       {/* Upload Area */}
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div
           {...getRootProps()}
-          className={`card-3d p-12 text-center cursor-pointer transition-all duration-300 border-2 border-dashed ${
+          className={`card-3d p-6 sm:p-8 md:p-12 text-center cursor-pointer transition-all duration-300 border-2 border-dashed ${
             isDragActive
               ? 'border-legal-500 bg-legal-50 scale-105 shadow-2xl'
               : 'border-gray-300 hover:border-legal-400 hover:bg-gray-50 hover:scale-102'
@@ -121,24 +121,24 @@ const Upload: React.FC = () => {
           <input {...getInputProps()} />
           
           {isDragActive ? (
-            <div className="space-y-4">
-              <ArrowUpTrayIcon className="h-16 w-16 text-legal-500 mx-auto animate-bounce" />
-              <p className="text-xl font-medium text-legal-700">Drop your files here!</p>
+            <div className="space-y-3 sm:space-y-4">
+              <ArrowUpTrayIcon className="h-12 w-12 sm:h-16 sm:w-16 text-legal-500 mx-auto animate-bounce" />
+              <p className="text-lg sm:text-xl font-medium text-legal-700">Drop your files here!</p>
             </div>
           ) : (
-            <div className="space-y-6">
-              <div className="w-20 h-20 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full flex items-center justify-center mx-auto">
-                <CloudArrowUpIcon className="h-10 w-10 text-white" />
+            <div className="space-y-4 sm:space-y-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-r from-gray-400 to-gray-500 rounded-full flex items-center justify-center mx-auto">
+                <CloudArrowUpIcon className="h-8 w-8 sm:h-10 sm:w-10 text-white" />
               </div>
               
               <div>
-                <p className="text-xl font-medium text-gray-900 mb-2">
+                <p className="text-lg sm:text-xl font-medium text-gray-900 mb-2">
                   Drag and drop your legal documents here
                 </p>
-                <p className="text-gray-600">or click to browse your files</p>
+                <p className="text-sm sm:text-base text-gray-600">or click to browse your files</p>
               </div>
               
-              <button className="btn-primary text-lg px-8 py-3">
+              <button className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3">
                 Choose Files
               </button>
             </div>
@@ -146,80 +146,80 @@ const Upload: React.FC = () => {
         </div>
 
         {/* File Requirements */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="card-elevated p-6 text-center">
-            <div className="text-3xl mb-3">📄</div>
-            <h3 className="font-semibold text-gray-900 mb-2">Supported Formats</h3>
-            <p className="text-sm text-gray-600">PDF, DOC, DOCX, TXT</p>
+        <div className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <div className="card-elevated p-4 sm:p-6 text-center">
+            <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">📄</div>
+            <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Supported Formats</h3>
+            <p className="text-xs sm:text-sm text-gray-600">PDF, DOC, DOCX, TXT</p>
           </div>
           
-          <div className="card-elevated p-6 text-center">
-            <div className="text-3xl mb-3">⚡</div>
-            <h3 className="font-semibold text-gray-900 mb-2">File Size Limit</h3>
-            <p className="text-sm text-gray-600">Maximum 10MB per file</p>
+          <div className="card-elevated p-4 sm:p-6 text-center">
+            <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">⚡</div>
+            <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">File Size Limit</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Maximum 10MB per file</p>
           </div>
           
-          <div className="card-elevated p-6 text-center">
-            <div className="text-3xl mb-3">🔒</div>
-            <h3 className="font-semibold text-gray-900 mb-2">Secure & Private</h3>
-            <p className="text-sm text-gray-600">Your documents are encrypted</p>
+          <div className="card-elevated p-4 sm:p-6 text-center">
+            <div className="text-2xl sm:text-3xl mb-2 sm:mb-3">🔒</div>
+            <h3 className="font-semibold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">Secure & Private</h3>
+            <p className="text-xs sm:text-sm text-gray-600">Your documents are encrypted</p>
           </div>
         </div>
       </div>
 
       {/* Uploaded Files */}
       {files.length > 0 && (
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">
             Uploaded Files ({files.length})
           </h2>
           
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {files.map((file) => (
-              <div key={file.id} className="floating-card p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="text-3xl">{getFileIcon(file)}</div>
+              <div key={file.id} className="floating-card p-4 sm:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
+                  <div className="flex items-center space-x-3 sm:space-x-4 min-w-0 flex-1">
+                    <div className="text-2xl sm:text-3xl flex-shrink-0">{getFileIcon(file)}</div>
                     <div className="flex-1 min-w-0">
-                      <h3 className="font-medium text-gray-900 truncate">{file.name}</h3>
-                      <p className="text-sm text-gray-500">
+                      <h3 className="font-medium text-gray-900 truncate text-sm sm:text-base">{file.name}</h3>
+                      <p className="text-xs sm:text-sm text-gray-500">
                         {formatFileSize(file.size)} • {file.type.split('/')[1].toUpperCase()}
                       </p>
                     </div>
                   </div>
                   
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center justify-between sm:justify-end space-x-3 sm:space-x-4">
                     {file.status === 'uploading' && (
-                      <div className="flex items-center space-x-2">
-                        <div className="w-32 bg-gray-200 rounded-full h-2">
+                      <div className="flex items-center space-x-2 flex-1 sm:flex-initial">
+                        <div className="w-24 sm:w-32 bg-gray-200 rounded-full h-2">
                           <div 
                             className="bg-legal-600 h-2 rounded-full transition-all duration-300"
                             style={{ width: `${file.progress}%` }}
                           ></div>
                         </div>
-                        <span className="text-sm text-gray-600">{Math.round(file.progress || 0)}%</span>
+                        <span className="text-xs sm:text-sm text-gray-600 flex-shrink-0">{Math.round(file.progress || 0)}%</span>
                       </div>
                     )}
                     
                     {file.status === 'completed' && (
                       <div className="flex items-center space-x-2 text-green-600">
-                        <CheckCircleIcon className="h-5 w-5" />
-                        <span className="text-sm font-medium">Completed</span>
+                        <CheckCircleIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                        <span className="text-xs sm:text-sm font-medium">Completed</span>
                       </div>
                     )}
                     
                     {file.status === 'error' && (
                       <div className="flex items-center space-x-2 text-red-600">
-                        <XCircleIcon className="h-5 w-5" />
-                        <span className="text-sm font-medium">Error</span>
+                        <XCircleIcon className="h-4 w-4 sm:h-5 sm:w-5" />
+                        <span className="text-xs sm:text-sm font-medium">Error</span>
                       </div>
                     )}
                     
                     <button
                       onClick={() => removeFile(file.id!)}
-                      className="text-gray-400 hover:text-red-500 transition-colors"
+                      className="text-gray-400 hover:text-red-500 transition-colors flex-shrink-0"
                     >
-                      <XCircleIcon className="h-5 w-5" />
+                      <XCircleIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                     </button>
                   </div>
                 </div>
@@ -228,9 +228,9 @@ const Upload: React.FC = () => {
           </div>
           
           {files.some(f => f.status === 'completed') && (
-            <div className="mt-8 text-center">
-              <button className="btn-primary text-lg px-8 py-3">
-                <DocumentTextIcon className="h-5 w-5 mr-2" />
+            <div className="mt-6 sm:mt-8 text-center">
+              <button className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3 flex items-center justify-center mx-auto">
+                <DocumentTextIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                 View Simplified Documents
               </button>
             </div>
@@ -239,17 +239,17 @@ const Upload: React.FC = () => {
       )}
 
       {/* Tips */}
-      <div className="max-w-4xl mx-auto">
-        <div className="card-elevated p-8 bg-gradient-to-br from-blue-50 to-indigo-50">
-          <div className="flex items-start space-x-4">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="card-elevated p-4 sm:p-6 md:p-8 bg-gradient-to-br from-blue-50 to-indigo-50">
+          <div className="flex flex-col sm:flex-row sm:items-start space-y-3 sm:space-y-0 sm:space-x-4">
             <div className="flex-shrink-0">
-              <InformationCircleIcon className="h-6 w-6 text-blue-600" />
+              <InformationCircleIcon className="h-5 w-5 sm:h-6 sm:w-6 text-blue-600" />
             </div>
             <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-3 sm:mb-4">
                 Tips for Best Results
               </h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-700">
+              <ul className="list-disc list-inside space-y-1 sm:space-y-2 text-gray-700 text-sm sm:text-base">
                 <li>Upload clear, readable documents for better translation accuracy</li>
                 <li>Legal contracts, agreements, and official documents work best</li>
                 <li>Our AI will adjust the complexity based on your English proficiency level</li>

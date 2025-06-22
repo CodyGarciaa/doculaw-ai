@@ -10,6 +10,7 @@ import DocumentViewer from './pages/DocumentViewer';
 import Chat from './pages/Chat';
 import Search from './pages/Search';
 import Dashboard from './pages/Dashboard';
+import GlassButtonDemo from './pages/GlassButtonDemo';
 
 function App() {
   return (

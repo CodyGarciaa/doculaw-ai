@@ -96,23 +96,23 @@ const Home: React.FC = () => {
   const englishLevel = userProfile.englishProficiency || 'intermediate';
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 space-y-8">
+    <div className="space-y-6 sm:space-y-8 overflow-x-hidden">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-28 hero-gradient text-white overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
+      <section className="relative py-12 sm:py-16 md:py-20 lg:py-28 hero-gradient text-white overflow-hidden mx-4 sm:mx-6 lg:mx-8 rounded-xl">
+        <div className="absolute inset-0 bg-black/10 rounded-xl"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-1 mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
             Welcome back, {userName}
           </h1>
-          <p className="subheading text-white/90 mb-8">
+          <p className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
             Your personalized legal assistant is ready to help you understand complex documents.
           </p>
           
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/upload" className="btn-primary bg-white text-legal-700 hover:bg-gray-100 body-large px-8 py-4">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center">
+            <Link to="/upload" className="btn-primary bg-white text-legal-700 hover:bg-gray-100 text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
               Upload Document
             </Link>
-            <Link to="/chat" className="btn-ghost body-large px-8 py-4">
+            <Link to="/chat" className="btn-ghost text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4">
               Ask Questions
             </Link>
           </div>
@@ -120,27 +120,27 @@ const Home: React.FC = () => {
       </section>
 
       {/* Quick Actions */}
-      <section className="py-16 md:py-24 section-gradient-light">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-24 section-gradient-light mx-4 sm:mx-6 lg:mx-8 rounded-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="heading-2 text-blue-700 mb-12 text-center">Quick Actions</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700 mb-8 sm:mb-12 text-center">Quick Actions</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                         {quickActions.map((action, index) => (
-               <Link 
-                 key={action.name} 
-                 to={action.href}
-                 className="card-elevated p-8 text-center group hover:shadow-gradient-glow transition-all duration-300"
-               >
-                 <div className="bg-blue-600 w-16 h-16 rounded-xl flex items-center justify-center mx-auto mb-6">
-                   <action.icon className="h-8 w-8 text-white" />
-                 </div>
-                 <h3 className="heading-4 text-gray-900 mb-4 group-hover:text-legal-600 transition-colors">
-                   {action.name}
-                 </h3>
-                 <p className="body-base text-gray-600 mb-6">{action.description}</p>
-                <div className="flex items-center text-legal-600 font-medium body-small justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            {quickActions.map((action, index) => (
+              <Link 
+                key={action.name} 
+                to={action.href}
+                className="card-elevated p-4 sm:p-6 lg:p-8 text-center group hover:shadow-gradient-glow transition-all duration-300"
+              >
+                <div className="bg-blue-600 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-xl flex items-center justify-center mx-auto mb-3 sm:mb-4 lg:mb-6">
+                  <action.icon className="h-6 w-6 sm:h-7 sm:w-7 lg:h-8 lg:w-8 text-white" />
+                </div>
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3 lg:mb-4 group-hover:text-legal-600 transition-colors">
+                  {action.name}
+                </h3>
+                <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4 lg:mb-6">{action.description}</p>
+                <div className="flex items-center text-legal-600 font-medium text-sm justify-center">
                   Get Started
-                  <ArrowRightIcon className="h-4 w-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRightIcon className="h-3 w-3 sm:h-4 sm:w-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </div>
               </Link>
             ))}
@@ -149,39 +149,39 @@ const Home: React.FC = () => {
       </section>
 
       {/* Recent Activity */}
-      <section className="py-16 md:py-24 section-gradient-subtle">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-24 section-gradient-subtle mx-4 sm:mx-6 lg:mx-8 rounded-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center mb-12">
-            <h2 className="heading-2 text-blue-700">Recent Activity</h2>
-            <Link to="/documents" className="body-base text-legal-600 hover:text-legal-700 transition-colors">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 sm:mb-12 space-y-2 sm:space-y-0">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700">Recent Activity</h2>
+            <Link to="/documents" className="text-sm sm:text-base text-legal-600 hover:text-legal-700 transition-colors">
               View All →
             </Link>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {recentActivity.map((activity, index) => (
-              <div key={index} className="card p-8 flex items-center justify-between">
-                <div className="flex items-center space-x-6">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+              <div key={index} className="card p-4 sm:p-6 lg:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-3 sm:space-y-0">
+                <div className="flex items-center space-x-3 sm:space-x-6">
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center ${
                     activity.type === 'document' ? 'bg-blue-600' :
                     activity.type === 'chat' ? 'bg-purple-600' : 'bg-cyan-600'
                   }`}>
-                    {activity.type === 'document' ? <DocumentTextIcon className="h-6 w-6 text-white" /> :
-                     activity.type === 'chat' ? <ChatBubbleBottomCenterTextIcon className="h-6 w-6 text-white" /> :
-                     <MagnifyingGlassIcon className="h-6 w-6 text-white" />}
+                    {activity.type === 'document' ? <DocumentTextIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white" /> :
+                     activity.type === 'chat' ? <ChatBubbleBottomCenterTextIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white" /> :
+                     <MagnifyingGlassIcon className="h-5 w-5 sm:h-6 sm:w-6 text-white" />}
                   </div>
                   <div>
-                    <h3 className="heading-5 text-gray-900">{activity.title}</h3>
-                    <div className="flex items-center body-small text-gray-600 space-x-4">
+                    <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">{activity.title}</h3>
+                    <div className="flex flex-col sm:flex-row sm:items-center text-xs sm:text-sm text-gray-600 sm:space-x-4 space-y-1 sm:space-y-0">
                       <span>{activity.time}</span>
-                      <span>•</span>
+                      <span className="hidden sm:inline">•</span>
                       <span>{activity.complexity || activity.messages || activity.results}</span>
                     </div>
                   </div>
                 </div>
                 
-                <div className="flex items-center space-x-4">
-                  <span className={`inline-flex items-center px-3 py-1 rounded-full body-small font-medium ${
+                <div className="flex items-center justify-between sm:justify-end space-x-3 sm:space-x-4">
+                  <span className={`inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-medium ${
                     activity.status === 'completed' ? 'bg-green-100 text-green-800' :
                     activity.status === 'active' ? 'bg-blue-100 text-blue-800' :
                     'bg-gray-100 text-gray-800'
@@ -189,7 +189,7 @@ const Home: React.FC = () => {
                     {activity.status.charAt(0).toUpperCase() + activity.status.slice(1)}
                   </span>
                   <button className="text-gray-400 hover:text-gray-600">
-                    <EllipsisVerticalIcon className="h-5 w-5" />
+                    <EllipsisVerticalIcon className="h-4 w-4 sm:h-5 sm:w-5" />
                   </button>
                 </div>
               </div>
@@ -199,83 +199,51 @@ const Home: React.FC = () => {
       </section>
 
       {/* Tips & Insights */}
-      <section className="py-16 md:py-24 section-gradient-light">
+      <section className="py-8 sm:py-12 md:py-16 lg:py-24 section-gradient-light mx-4 sm:mx-6 lg:mx-8 rounded-xl">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="heading-2 text-blue-700 mb-12 text-center">Tips & Insights</h2>
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700 mb-8 sm:mb-12 text-center">Tips & Insights</h2>
           
-                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
             {tips.map((tip, index) => (
-              <div key={index} className="floating-card p-8 group">
-                <div className="bg-blue-600 w-12 h-12 rounded-xl flex items-center justify-center mb-6 text-2xl">
-                  {tip.icon}
-                </div>
-                <h3 className="heading-4 text-gray-900 mb-4 group-hover:text-legal-600 transition-colors">
+              <div key={index} className="card p-4 sm:p-6 lg:p-8 text-center group hover:shadow-lg transition-all duration-300">
+                <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{tip.icon}</div>
+                <h3 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900 mb-2 sm:mb-3 group-hover:text-legal-600 transition-colors">
                   {tip.title}
                 </h3>
-                <p className="body-large text-gray-600">{tip.description}</p>
+                <p className="text-sm sm:text-base text-gray-600 leading-relaxed">
+                  {tip.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Personal Stats */}
-      <section className="py-16 md:py-24 section-gradient-subtle">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="heading-2 text-blue-700 mb-8">
-            Your Legal Journey
-          </h2>
-          <p className="subheading text-gray-600 mb-16 max-w-3xl mx-auto">
-            See how much time and money you've saved using DocuLaw AI.
-          </p>
+      {/* Stats Overview */}
+      <section className="py-8 sm:py-12 md:py-16 lg:py-24 bg-white mx-4 sm:mx-6 lg:mx-8 rounded-xl shadow-lg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-blue-700 mb-8 sm:mb-12 text-center">Your Progress</h2>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="card-elevated p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-700 mb-4">89%</div>
-              <div className="body-base text-gray-600">Complexity Reduction</div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-700 mb-1 sm:mb-2">3</div>
+              <div className="text-xs sm:text-sm text-gray-600">Documents Processed</div>
             </div>
-            <div className="card-elevated p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-700 mb-4">4.2hrs</div>
-              <div className="body-base text-gray-600">Average Time Saved</div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-700 mb-1 sm:mb-2">12</div>
+              <div className="text-xs sm:text-sm text-gray-600">Questions Asked</div>
             </div>
-            <div className="card-elevated p-8 text-center">
-              <div className="text-4xl md:text-5xl font-bold text-blue-700 mb-4">$1,200</div>
-              <div className="body-base text-gray-600">Legal Costs Avoided</div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-700 mb-1 sm:mb-2">85%</div>
+              <div className="text-xs sm:text-sm text-gray-600">Complexity Reduced</div>
+            </div>
+            <div className="text-center">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-700 mb-1 sm:mb-2">7</div>
+              <div className="text-xs sm:text-sm text-gray-600">Days Active</div>
             </div>
           </div>
         </div>
       </section>
-
-      {/* Community Impact */}
-      <div className="card-elevated p-8 bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-r from-green-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-6">
-            <StarIcon className="h-8 w-8 text-white" />
-          </div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            You're Making a Difference!
-          </h2>
-          <p className="text-lg text-gray-600 mb-6 max-w-2xl mx-auto">
-            By using DocuLaw AI, you're part of a movement to make legal information 
-            accessible to everyone. Every document you simplify helps build a better 
-            understanding of legal rights in underserved communities.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <div className="text-3xl font-bold text-blue-700">98%</div>
-              <div className="text-sm text-gray-600">Complexity Reduction</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-700">2.5 hrs</div>
-              <div className="text-sm text-gray-600">Average Time Saved</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold text-blue-700">$280</div>
-              <div className="text-sm text-gray-600">Legal Costs Avoided</div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

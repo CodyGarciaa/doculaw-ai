@@ -73,14 +73,78 @@
   .btn-primary {
     /* Solid blue for better contrast against gradient backgrounds */
     @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(93, 150, 241, 0.95) 0%, rgba(138, 140, 242, 0.95) 50%, rgba(178, 151, 241, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%, rgba(255, 255, 255, 0.05) 100%);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .btn-primary:hover::before {
+    opacity: 0.8;
   }
   
   .btn-secondary {
     @apply bg-gradient-to-r from-white to-gray-50 hover:from-gray-50 hover:to-gray-100 text-gray-900 font-medium py-3 px-6 rounded-lg transition-all duration-300 shadow-md hover:shadow-lg border border-gray-200 transform hover:-translate-y-0.5;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .btn-secondary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 50%, rgba(255, 255, 255, 0.1) 100%);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  
+  .btn-secondary:hover::before {
+    opacity: 0.6;
   }
   
   .btn-ghost {
     @apply bg-transparent hover:bg-gradient-to-r hover:from-white/10 hover:to-white/5 text-white font-medium py-3 px-6 rounded-lg transition-all duration-300 border border-white/20 hover:border-white/40;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .btn-ghost::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, transparent 50%, rgba(255, 255, 255, 0.08) 100%);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    opacity: 0;
+  }
+  
+  .btn-ghost:hover::before {
+    opacity: 1;
   }
   
   /* Card Components with Subtle Gradients */

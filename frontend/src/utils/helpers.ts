@@ -168,4 +168,87 @@ export const storage = {
 // Generate unique IDs
 export const generateId = (): string => {
   return Date.now().toString(36) + Math.random().toString(36).substr(2);
+};
+
+// User data management for onboarding
+export interface UserProfile {
+  id: string;
+  name: string;
+  primaryLanguage: string;
+  englishProficiency: 'beginner' | 'intermediate' | 'advanced';
+  legalExperience: 'none' | 'some' | 'experienced';
+  primaryNeeds: string[];
+  readingPreference: 'simple' | 'standard' | 'detailed';
+  communicationStyle: 'visual' | 'text' | 'audio';
+  onboardingCompleted: boolean;
+  dateCompleted: string;
+  lastUpdated: string;
+}
+
+// Save user profile data to user.json
+export const saveUserProfile = async (profileData: Omit<UserProfile, 'id' | 'dateCompleted' | 'lastUpdated'>): Promise<UserProfile> => {
+  try {
+    const profile: UserProfile = {
+      ...profileData,
+      id: generateUserId(),
+      dateCompleted: new Date().toISOString(),
+      lastUpdated: new Date().toISOString(),
+    };
+
+    // Save to localStorage for immediate access
+    localStorage.setItem('doculaw_user_profile', JSON.stringify(profile));
+    localStorage.setItem('doculaw_onboarding', JSON.stringify(profileData));
+    
+    // Log the complete user profile structure for LLM integration
+    const profileForLLM = {
+      profile,
+      formattedContext: formatUserContextForLLM(profile),
+      savedAt: new Date().toISOString()
+    };
+    
+    console.log('=== USER PROFILE SAVED FOR LLM INTEGRATION ===');
+    console.log(JSON.stringify(profileForLLM, null, 2));
+    console.log('=== END USER PROFILE DATA ===');
+    
+    return profile;
+  } catch (error) {
+    console.error('Error saving user profile:', error);
+    throw error;
+  }
+};
+
+// Retrieve user profile data
+export const getUserProfile = (): UserProfile | null => {
+  try {
+    const stored = localStorage.getItem('doculaw_user_profile');
+    return stored ? JSON.parse(stored) : null;
+  } catch (error) {
+    console.error('Error retrieving user profile:', error);
+    return null;
+  }
+};
+
+// Generate a unique user ID
+const generateUserId = (): string => {
+  return `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+};
+
+// Get user preferences formatted for LLM context
+export const getUserContextForLLM = (): string => {
+  const profile = getUserProfile();
+  if (!profile) return '';
+  return formatUserContextForLLM(profile);
+};
+
+// Helper function to format user profile for LLM context
+const formatUserContextForLLM = (profile: UserProfile): string => {
+  return `User Profile:
+- Name: ${profile.name}
+- Primary Language: ${profile.primaryLanguage}
+- English Proficiency: ${profile.englishProficiency}
+- Legal Experience: ${profile.legalExperience}
+- Document Types Needed: ${profile.primaryNeeds.join(', ')}
+- Reading Preference: ${profile.readingPreference}
+- Communication Style: ${profile.communicationStyle}
+- Onboarding Completed: ${profile.dateCompleted}`;
 }; 

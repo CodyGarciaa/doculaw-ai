@@ -1,0 +1,21 @@
+{
+  "profiles": [],
+  "currentUser": null,
+  "lastUpdated": "",
+  "version": "1.0.0",
+  "schema": {
+    "profile": {
+      "id": "string - unique identifier",
+      "name": "string - user's first name",
+      "primaryLanguage": "string - user's primary language",
+      "englishProficiency": "beginner | intermediate | advanced",
+      "legalExperience": "none | some | experienced",
+      "primaryNeeds": "array of strings - selected document types",
+      "readingPreference": "simple | standard | detailed",
+      "communicationStyle": "visual | text | audio",
+      "onboardingCompleted": "boolean",
+      "dateCompleted": "ISO date string",
+      "lastUpdated": "ISO date string"
+    }
+  }
+}
