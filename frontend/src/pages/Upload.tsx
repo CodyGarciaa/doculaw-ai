@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { useNavigate } from 'react-router-dom';
 import {
   CloudArrowUpIcon,
   DocumentTextIcon,
@@ -17,6 +18,7 @@ interface FileWithPreview extends File {
 }
 
 const Upload: React.FC = () => {
+  const navigate = useNavigate();
   const [files, setFiles] = useState<FileWithPreview[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -229,7 +231,10 @@ const Upload: React.FC = () => {
           
           {files.some(f => f.status === 'completed') && (
             <div className="mt-6 sm:mt-8 text-center">
-              <button className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3 flex items-center justify-center mx-auto">
+              <button 
+                onClick={() => navigate('/workspace/1')}
+                className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-2 sm:py-3 flex items-center justify-center mx-auto"
+              >
                 <DocumentTextIcon className="h-4 w-4 sm:h-5 sm:w-5 mr-2" />
                 View Simplified Documents
               </button>

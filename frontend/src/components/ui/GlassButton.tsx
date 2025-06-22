@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import LiquidGlass from 'liquid-glass-react';
 
 interface GlassButtonProps {
   children: React.ReactNode;
@@ -25,8 +24,8 @@ const GlassButton: React.FC<GlassButtonProps> = ({
   href,
   to
 }) => {
-  // Base styles for the button content
-  const baseStyles = 'font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap';
+  // Base glass effect styles
+  const baseStyles = 'relative overflow-hidden font-medium rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center whitespace-nowrap backdrop-blur-sm border';
   
   // Size styles
   const sizeStyles = {
@@ -35,95 +34,56 @@ const GlassButton: React.FC<GlassButtonProps> = ({
     lg: 'text-lg px-8 py-4'
   };
 
-  // Variant styles for the inner content
+  // Variant styles with glass morphism effect
   const variantStyles = {
-    primary: 'text-white font-semibold',
-    secondary: 'text-gray-900 font-medium',
-    ghost: 'text-white font-medium'
+    primary: 'text-white font-semibold bg-gradient-to-br from-blue-500/90 to-purple-600/90 border-white/20 hover:from-blue-400/95 hover:to-purple-500/95 shadow-lg shadow-blue-500/25',
+    secondary: 'text-gray-900 font-medium bg-gradient-to-br from-white/80 to-gray-50/80 border-gray-200/30 hover:from-white/90 hover:to-gray-50/90 shadow-lg shadow-gray-500/10',
+    ghost: 'text-white font-medium bg-gradient-to-br from-white/10 to-white/5 border-white/20 hover:from-white/20 hover:to-white/10 shadow-lg shadow-black/10'
   };
 
-  // Liquid glass configuration based on variant
-  const glassConfig = {
-    primary: {
-      displacementScale: 45,
-      blurAmount: 0.08,
-      saturation: 120,
-      aberrationIntensity: 1.5,
-      elasticity: 0.25,
-      cornerRadius: 8,
-      overLight: false
-    },
-    secondary: {
-      displacementScale: 35,
-      blurAmount: 0.05,
-      saturation: 100,
-      aberrationIntensity: 1,
-      elasticity: 0.15,
-      cornerRadius: 8,
-      overLight: true
-    },
-    ghost: {
-      displacementScale: 40,
-      blurAmount: 0.1,
-      saturation: 90,
-      aberrationIntensity: 2,
-      elasticity: 0.3,
-      cornerRadius: 8,
-      overLight: false
-    }
-  };
+  // Glass shine effect overlay
+  const shineOverlay = (
+    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out" />
+  );
+
+  const buttonClasses = `group ${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl active:scale-95'}`;
 
   const buttonContent = (
-    <div className={`${baseStyles} ${sizeStyles[size]} ${variantStyles[variant]} ${className}`}>
-      {children}
-    </div>
-  );
-
-  // Get the original button class based on variant
-  const originalButtonClass = variant === 'primary' ? 'btn-primary' : 
-                              variant === 'secondary' ? 'btn-secondary' : 
-                              'btn-ghost';
-
-  const glassButton = (
-    <LiquidGlass
-      {...glassConfig[variant]}
+    <button
+      type={type}
       onClick={onClick}
-      className={`${originalButtonClass} ${sizeStyles[size]} ${className} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`}
-      style={{
-        display: 'inline-flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        background: variant === 'primary' 
-          ? 'linear-gradient(135deg, rgba(59, 130, 246, 0.95) 0%, rgba(99, 102, 241, 0.95) 50%, rgba(139, 92, 246, 0.95) 100%)'
-          : variant === 'secondary'
-          ? 'linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(249, 250, 251, 0.95) 100%)'
-          : 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%)',
-        border: variant === 'ghost' ? '1px solid rgba(255, 255, 255, 0.2)' : 'none',
-        borderRadius: '8px'
-      }}
+      disabled={disabled}
+      className={buttonClasses}
     >
-      {children}
-    </LiquidGlass>
+      {shineOverlay}
+      <span className="relative z-10">{children}</span>
+    </button>
   );
 
-  // Handle different button types - preserve original structure
+  // Handle different button types
   if (href) {
     return (
-      <a href={href}>
-        {glassButton}
+      <a href={href} className="inline-block">
+        <div className={buttonClasses.replace('button', 'div')}>
+          {shineOverlay}
+          <span className="relative z-10">{children}</span>
+        </div>
       </a>
     );
   }
 
   if (to) {
     return (
-      <Link to={to}>
-        {glassButton}
+      <Link to={to} className="inline-block">
+        <div className={buttonClasses.replace('button', 'div')}>
+          {shineOverlay}
+          <span className="relative z-10">{children}</span>
+        </div>
       </Link>
     );
   }
 
-  return glassButton;
+  return buttonContent;
 };
 
 export default GlassButton; 

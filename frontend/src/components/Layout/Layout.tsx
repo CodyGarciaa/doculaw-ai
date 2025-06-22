@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   HomeIcon,
   DocumentTextIcon,
@@ -11,8 +11,10 @@ import {
   XMarkIcon,
   UserCircleIcon,
   Cog6ToothIcon,
+  ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import { clsx } from '../../utils/helpers';
+import { authService } from '../../services/dataService';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -30,11 +32,17 @@ const navigation = [
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  // Get user profile from localStorage (from onboarding)
-  const userProfile = JSON.parse(localStorage.getItem('doculaw_user_profile') || '{}');
-  const userName = userProfile.name || 'User';
-  const englishLevel = userProfile.englishProficiency || 'intermediate';
+  // Get user profile from auth service
+  const currentUser = authService.getCurrentUser();
+  const userName = currentUser?.fullName || currentUser?.email || 'User';
+  const englishLevel = currentUser?.preferences?.simplificationLevel || 'intermediate';
+
+  const handleSignOut = async () => {
+    await authService.signOut();
+    navigate('/auth');
+  };
 
   const isCurrentPage = (href: string) => {
     if (href === '/home') {
@@ -209,9 +217,19 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                   {englishLevel}
                 </span>
               </div>
-              <button className="w-8 h-8 bg-gradient-to-r from-legal-600 to-purple-600 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
-                <UserCircleIcon className="h-5 w-5" />
-              </button>
+              <div className="flex items-center space-x-2">
+                <button className="w-8 h-8 bg-gradient-to-r from-legal-600 to-purple-600 rounded-full flex items-center justify-center text-white hover:scale-110 transition-transform">
+                  <UserCircleIcon className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={handleSignOut}
+                  className="hidden sm:flex items-center px-3 py-1.5 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-all duration-300"
+                  title="Sign Out"
+                >
+                  <ArrowRightOnRectangleIcon className="h-4 w-4 mr-1" />
+                  Sign Out
+                </button>
+              </div>
             </div>
           </div>
         </div>

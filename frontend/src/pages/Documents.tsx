@@ -14,6 +14,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { Document } from '../types';
 import { formatDate, formatFileSize, truncateText } from '../utils/helpers';
+import { documentService, type DocumentData } from '../services/dataService';
 
 // Mock data - replace with actual API calls
 const mockDocuments: Document[] = [
@@ -70,18 +71,30 @@ const mockDocuments: Document[] = [
 ];
 
 const Documents: React.FC = () => {
-  const [documents, setDocuments] = useState<Document[]>([]);
+  const [documents, setDocuments] = useState<DocumentData[]>([]);
   const [loading, setLoading] = useState(true);
   const [filterStatus, setFilterStatus] = useState<'all' | 'completed' | 'processing' | 'error'>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [sortBy, setSortBy] = useState<string>('date');
 
   useEffect(() => {
-    // Simulate API call
-    setTimeout(() => {
-      setDocuments(mockDocuments);
-      setLoading(false);
-    }, 1000);
+    const loadDocuments = async () => {
+      try {
+        const { documents, error } = await documentService.getUserDocuments();
+        
+        if (error) {
+          console.error('Error loading documents:', error);
+        } else {
+          setDocuments(documents);
+        }
+      } catch (err) {
+        console.error('Error loading documents:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadDocuments();
   }, []);
 
   const filteredDocuments = documents.filter(doc => {
@@ -288,20 +301,20 @@ const Documents: React.FC = () => {
                 {/* Date */}
                 <div className="flex items-center text-xs sm:text-sm text-gray-500 mb-4">
                   <CalendarIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
-                  {formatDate(document.uploadDate)}
+                  {formatDate(document.createdAt)}
                 </div>
 
                 {/* Actions */}
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
                   <Link
-                    to={`/document/${document.id}`}
+                    to={`/workspace/${document.id}`}
                     className="flex-1 btn-primary text-center text-xs sm:text-sm py-2"
                   >
                     <EyeIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
                     View
                   </Link>
                   <Link
-                    to={`/chat?document=${document.id}`}
+                    to={`/workspace/${document.id}`}
                     className="flex-1 btn-secondary text-center text-xs sm:text-sm py-2"
                   >
                     <ChatBubbleBottomCenterTextIcon className="h-3 w-3 sm:h-4 sm:w-4 mr-1 sm:mr-2" />
