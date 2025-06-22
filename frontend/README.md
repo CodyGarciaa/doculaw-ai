@@ -440,3 +440,17 @@ For frontend-specific questions:
 - Advanced AI features
 - Integration APIs
 - Enterprise features 
+
+For questions or issues:
+1. Check the main project documentation
+2. Review the API documentation
+3. Submit issues to the project repository 
+
+
+
+Installs:
+- pip install pinecone
+- pip install groq
+- pip install openai 
+- pip install pinecone-client
+- pip install python-dotenv
