@@ -455,3 +455,4 @@ Installs:
 - pip install pinecone-client
 - pip install python-dotenv
 - pip install PyMuPDF
+- npm install @supabase/supabase-js 

@@ -5,6 +5,7 @@ import time
 from dotenv import load_dotenv
 from openai import OpenAI
 from pinecone import Pinecone, ServerlessSpec
+from supabase import create_client, Client
 
 # File path to your PDF
 # PDF_FILE_PATH = "/Users/codygarcia/Downloads/groq-privacy-policy.pdf"
@@ -27,6 +28,7 @@ DIMENSION       = 1536  # must match embedding size
 # --------------------------
 # 🔌 Clients
 # --------------------------
+supabase: Client = create_client(os.getenv("PUBLIC_SUPABASE_URL"), os.getenv("PUBLIC_SUPABASE_KEY"))
 openai_client = OpenAI(api_key=OPENAI_API_KEY)
 groq_client = OpenAI(
 api_key=GROQ_API_KEY,
@@ -43,6 +45,20 @@ def slugify_filename(file_path):
     name = re.sub(r'[^a-z0-9-]+', '-', name)
     name = re.sub(r'[-]+', '-', name).strip('-')
     return name[:45]
+
+def upload_to_bucket(file_path: str):
+    """
+    Uploads the PDF file to the configured Supabase bucket.
+    Returns the public URL of the uploaded PDF.
+    """
+    bucket = supabase.storage.from_("docupdfs")
+    file_name = slugify_filename(file_path)
+    # Upload file directly from local path, preserving original PDF
+    with open(file_path, "rb") as pdf_file:
+        res = bucket.upload(
+            (file_name + '.pdf'),    # the key/path in your bucket
+            pdf_file      # a file-like object
+        )
 
 
 # extract text from pdf
@@ -107,7 +123,7 @@ def wait_for_index_ready(index, min_vectors=1, timeout=30):
 def summarize_index(index_name, chunk_group_size=5):
     index = pc.Index(index_name)
     wait_for_index_ready(index)
-    
+
     results = index.query(
         vector=embed_text("Summarize this document"),
         top_k=40,
@@ -149,4 +165,5 @@ def summarize_pdf(file_path):
 # run
 if __name__ == "__main__":
     # Use the PDF file from your Downloads folder
-    summarize_pdf(PDF_FILE_PATH)
+    # summarize_pdf(PDF_FILE_PATH)
+    upload_to_bucket(PDF_FILE_PATH)
